@@ -31,14 +31,6 @@ ensemble_model = api.model('EnsembleRequest', {
 })
 
 # Configuration
-OPENROUTER_API_KEY = "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"
-HEADERS = {
-    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-    "Content-Type": "application/json",
-    "HTTP-Referer": "https://llm-ensemble.onrender.com",
-    "X-Title": "LLM Ensemble API"
-}
-
 # Default models (OpenRouter model IDs)
 DEFAULT_MODELS = [
     'deepseek/deepseek-chat-v3-0324:free',
@@ -58,6 +50,15 @@ def get_model_info(model_id):
 
 def query_model(prompt: str, model_id: str) -> dict:
     """Query a single model through OpenRouter"""
+    
+    OPENROUTER_API_KEY = "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"
+    HEADERS = {
+                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                "HTTP-Referer": "http://localhost:5500",
+                "Content-Type": "application/json",
+                "X-Title": "LLM Ensemble API"
+            }
+    print(HEADERS)
     start_time = time.time()
     model_info = get_model_info(model_id)
     
