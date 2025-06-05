@@ -51,9 +51,9 @@ def get_model_info(model_id):
 def query_model(prompt: str, model_id: str) -> dict:
     """Query a single model through OpenRouter"""
     
-    OPENROUTER_API_KEY = "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"
+    api_key = os.getenv("OPENROUTER_API_KEY")
     HEADERS = {
-                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                "Authorization": f"Bearer {api_key}",
                 "HTTP-Referer": "http://localhost:5500",
                 "Content-Type": "application/json",
                 "X-Title": "LLM Ensemble API"
