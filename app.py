@@ -31,7 +31,7 @@ ensemble_model = api.model('EnsembleRequest', {
 })
 
 # Configuration
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 HEADERS = {
     "Authorization": f"Bearer {OPENROUTER_API_KEY}",
     "HTTP-Referer": "https://llm-ensemble.onrender.com",
