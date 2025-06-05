@@ -34,8 +34,8 @@ ensemble_model = api.model('EnsembleRequest', {
 # Default models (OpenRouter model IDs)
 DEFAULT_MODELS = [
     'deepseek/deepseek-chat-v3-0324:free',
-    'qwen/qwen3-30b-a3b:free',
-    'google/gemini-2.0-flash-exp:free',
+    #'qwen/qwen3-30b-a3b:free',
+    #'google/gemini-2.0-flash-exp:free',
     'meta-llama/llama-3.3-70b-instruct:free'
 ]
 
