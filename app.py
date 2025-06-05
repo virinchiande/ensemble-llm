@@ -119,9 +119,10 @@ def consolidate_responses(prompt: str, responses: list) -> dict:
     # Use Claude for consolidation (better for analysis)
     return query_model(consolidation_prompt, 'openai/gpt-3.5-turbo')
  
-@ns.route('/')
-def home():
-    return {"status": "API is running!"}
+@ns.route('/testApi')
+class testApi(Resource):
+    def home():
+        return {"status": "API is running!"}
 
 @ns.route('/query')
 class EnsembleQuery(Resource):
