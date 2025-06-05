@@ -31,19 +31,20 @@ ensemble_model = api.model('EnsembleRequest', {
 })
 
 # Configuration
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 HEADERS = {
     "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+    "Content-Type": "application/json",
     "HTTP-Referer": "https://llm-ensemble.onrender.com",
     "X-Title": "LLM Ensemble API"
 }
 
 # Default models (OpenRouter model IDs)
 DEFAULT_MODELS = [
-    'mistralai/mistral-7b-instruct',
+    'deepseek/deepseek-chat-v3-0324:free',
     'qwen/qwen3-30b-a3b:free',
-    'openai/gpt-3.5-turbo',
-    'meta-llama/llama-3-8b-instruct'
+    'google/gemini-2.0-flash-exp:free',
+    'meta-llama/llama-3.3-70b-instruct:free'
 ]
 
 def get_model_info(model_id):
@@ -109,7 +110,7 @@ def consolidate_responses(prompt: str, responses: list) -> dict:
     
     {comparison}
     
-    Provide a structured comparison with:
+    Provide a structured comparison with no more than 300 words:
     1. Key points of agreement
     2. Major differences
     3. Recommended synthesis
@@ -117,8 +118,8 @@ def consolidate_responses(prompt: str, responses: list) -> dict:
     """
     
     # Use Claude for consolidation (better for analysis)
-    return query_model(consolidation_prompt, 'openai/gpt-3.5-turbo')
- 
+    return query_model(consolidation_prompt, 'deepseek/deepseek-chat-v3-0324:free')
+
 @ns.route('/testApi')
 class testApi(Resource):
     def get(self):
