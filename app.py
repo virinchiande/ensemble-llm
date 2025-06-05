@@ -31,7 +31,7 @@ ensemble_model = api.model('EnsembleRequest', {
 })
 
 # Configuration
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 HEADERS = {
     "Authorization": f"Bearer {OPENROUTER_API_KEY}",
     "Content-Type": "application/json",
