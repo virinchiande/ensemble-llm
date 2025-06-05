@@ -121,7 +121,7 @@ def consolidate_responses(prompt: str, responses: list) -> dict:
  
 @ns.route('/testApi')
 class testApi(Resource):
-    def home():
+    def get(self):
         return {"status": "API is running!"}
 
 @ns.route('/query')
