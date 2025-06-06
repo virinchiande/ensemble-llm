@@ -5,9 +5,12 @@ import requests
 import os
 from concurrent.futures import ThreadPoolExecutor
 import time
+from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app, resources={r"/ask": {"origins": "https://calcuttapuri.com"}})
+
 api = Api(
     app,
     version='1.0',
@@ -116,9 +119,10 @@ def consolidate_responses(prompt: str, responses: list) -> dict:
     2. Major differences
     3. Recommended synthesis
     4. Confidence level (High/Medium/Low)
+    in a single paragraph.
     """
     
-    # Use Claude for consolidation (better for analysis)
+    # Use Deepseek for consolidation (better for analysis)
     return query_model(consolidation_prompt, 'deepseek/deepseek-chat-v3-0324:free')
 
 @ns.route('/testApi')
