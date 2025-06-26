@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Ensemble - Calcuttapuri</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --success: #27ae60;
+      --error: #e74c3c;
+      --warning: #f39c12;
+      --bg: #f8fafc;
+      --white: #fff;
+      --shadow: 0 4px 20px rgba(44,62,80,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .form-container {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 3rem 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 1.2rem;
+      border: 2px solid #e1e8ed;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      resize: vertical;
+      min-height: 120px;
+      transition: all 0.3s ease;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, var(--secondary), #2980b9);
+      color: var(--white);
+      border: none;
+      padding: 1.2rem 3rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    }
+
+    .submit-btn:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 2rem;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--secondary);
+    }
+
+    .error-message {
+      background: #fdf2f2;
+      color: var(--error);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--error);
+      margin-bottom: 2rem;
+    }
+
+    .results-container {
+      margin-top: 3rem;
+    }
+
+    .results-header {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 2rem 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .results-header h2 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .query-display {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--secondary);
+      font-style: italic;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--secondary);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .response-item {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .response-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(44,62,80,0.12);
+    }
+
+    .response-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f3f4;
+    }
+
+    .model-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .latency {
+      background: #e8f5e8;
+      color: var(--success);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .response-content {
+      line-height: 1.8;
+      color: #444;
+      font-size: 1rem;
+    }
+
+    .error-response {
+      border-left: 4px solid var(--error);
+      background: #fdf2f2;
+    }
+
+    .error-response .model-name {
+      color: var(--error);
+    }
+
+    .error-response .latency {
+      background: #fdf2f2;
+      color: var(--error);
+    }
+
+    .consolidated-analysis {
+      background: linear-gradient(135deg, #e8f5e8, #d5f4e6);
+      border-left: 4px solid var(--success);
+    }
+
+    .consolidated-analysis .model-name {
+      color: var(--success);
+    }
+
+    .consolidated-analysis .response-header {
+      border-bottom-color: var(--success);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem 0.5rem;
+      }
+
+      .header h1 {
+        font-size: 2.2rem;
+      }
+
+      .form-container {
+        padding: 2rem 1.5rem;
+      }
+
+      .response-item {
+        padding: 1.5rem;
+      }
+
+      .response-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .stats {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-brain"></i> LLM Ensemble</h1>
+      <p>Query multiple AI models simultaneously and get consolidated insights from their responses</p>
+    </div>
+
+    <div class="form-container">
+      {% if error %}
+        <div class="error-message">
+          <i class="fas fa-exclamation-triangle"></i> {{ error }}
+        </div>
+      {% endif %}
+
+      <form method="POST">
+        <div class="form-group">
+          <label for="prompt">Your Question or Prompt:</label>
+          <textarea 
+            name="prompt" 
+            id="prompt" 
+            placeholder="Ask a question to debate with multiple LLMs... For example: 'What are the pros and cons of artificial intelligence in education?'"
+            required
+          >{{ prompt if prompt }}</textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-paper-plane"></i> Query LLMs
+        </button>
+      </form>
+
+      <a href="/" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </div>
+
+    {% if results %}
+    <div class="results-container">
+      <div class="results-header">
+        <h2><i class="fas fa-chart-line"></i> Results</h2>
+        <div class="query-display">
+          "{{ prompt }}"
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-number">{{ success_count }}</div>
+            <div class="stat-label">Successful</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">{{ total_count }}</div>
+            <div class="stat-label">Total Models</div>
+          </div>
+        </div>
+      </div>
+
+      {% for result in results %}
+      <div class="response-item {% if not result.success %}error-response{% endif %}">
+        <div class="response-header">
+          <div class="model-name">
+            <i class="fas fa-robot"></i> {{ result.model_name }}
+          </div>
+          <div class="latency">
+            <i class="fas fa-clock"></i> {{ result.latency }}s
+          </div>
+        </div>
+        <div class="response-content">
+          {% if result.success %}
+            {{ result.response | replace('\n', '<br>') | safe }}
+          {% else %}
+            <strong>Error:</strong> {{ result.error }}
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+
+      {% if consolidation and consolidation.success %}
+      <div class="response-item consolidated-analysis">
+        <div class="response-header">
+          <div class="model-name">
+            <i class="fas fa-chart-line"></i> Consolidated Analysis
+          </div>
+          <div class="latency">
+            <i class="fas fa-magic"></i> AI Generated
+          </div>
+        </div>
+        <div class="response-content">
+          {{ consolidation.response | replace('\n', '<br>') | safe }}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
