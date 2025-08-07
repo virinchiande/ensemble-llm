@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Letter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+    --primary: #ffd600;
+    --secondary: #ffe066;
+    --accent: #e67e22;
+    --bg: #222;
+    --white: #333;
+    --shadow: 0 4px 20px rgba(44,62,80,0.08);
+    }
+    body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--primary);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
+    .container {
+    background: var(--white);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    padding: 2.5rem;
+    max-width: 600px;
+    width: 100%;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    }
+    h2 {
+    margin-bottom: 1.5rem;
+    color: var(--secondary);
+    }
+    label {
+    color: var(--primary);
+    font-weight: 600;
+    margin-top: 1rem;
+    align-self: flex-start;
+    }
+    input[type="password"],
+    input[type="file"] {
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    background: #444;
+    color: var(--primary);
+    }
+    button {
+    margin-top: 2rem;
+    background: var(--accent);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+    }
+    button:hover {
+    background: #d35400;
+    }
+    .back-home {
+    position: absolute;
+    top: 1.2rem;
+    left: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--secondary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-home" href="{{ url_for('index') }}">
+    <i class="fas fa-arrow-left"></i> Home
+    </a>
+    <h2>Upload a New Letter</h2>
+    <form id="uploadForm" action="{{ url_for('upload_letter') }}" method="post" enctype="multipart/form-data">
+    <label for="password">Create Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="document">Choose a Document (PDF or DOCX only):</label>
+    <input type="file" id="document" name="document" accept=".pdf,.docx" required>
+
+    <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('uploadForm');
+      const fileInput = document.getElementById('document');
+    
+      function isValidFileType(file) {
+        const allowedTypes = [
+          'application/pdf',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ];
+        const allowedExtensions = ['.pdf', '.docx'];
+        if (allowedTypes.includes(file.type)) return true;
+        const fileName = file.name.toLowerCase();
+        return allowedExtensions.some(ext => fileName.endsWith(ext));
+      }
+    
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const file = fileInput.files[0];
+        if (!file) {
+          alert('Please select a file');
+          return;
+        }
+        if (!isValidFileType(file)) {
+          alert('Only PDF and DOCX files are allowed');
+          fileInput.value = '';
+          return;
+        }
+        uploadLetter(new FormData(form), false);
+      });
+    
+      function uploadLetter(formData, forceUpdate) {
+        if (forceUpdate) {
+          formData.set('force_update', 'true');
+        }
+        fetch('/upload_letter', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            alert('Upload complete');
+            window.location.href = '/letters';
+          } else if (data.status === 'duplicate_password') {
+            // Show prompt, and if user clicks OK, retry with force_update
+            if (confirm('Upload failed: ' + (data.message || 'Duplicate password. The file will be updated with the new file') + '\n\nClick OK to update the file.')) {
+              // Retry with force_update
+              uploadLetter(formData, true);
+            }
+          } else {
+            alert('Upload failed: ' + (data.message || 'Unknown error'));
+            window.location.href = '/letters';
+          }
+        })
+        .catch(() => {
+          alert('Upload failed: Network error');
+          window.location.href = '/letters';
+        });
+      }
+    
+      fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file && !isValidFileType(file)) {
+          alert('Only PDF and DOCX files are allowed');
+          event.target.value = '';
+        }
+      });
+    });
+    </script>
+</body>
+</html>

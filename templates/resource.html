@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources - Calcuttapuri</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #ffd600;
+      --secondary: #ffe066;
+      --accent: #e67e22;
+      --bg: #222;
+      --white: #333;
+      --sidebar-width: 260px;
+      --shadow: 0 4px 20px rgba(44,62,80,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: var(--sidebar-width);
+      background: linear-gradient(135deg, #444 0%, #222 100%);
+      color: var(--primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      position: fixed;
+      height: 100vh;
+      box-shadow: var(--shadow);
+      z-index: 100;
+    }
+
+    .sidebar .logo {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      color: var(--secondary);
+    }
+
+    .sidebar nav {
+      width: 100%;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 1.1rem;
+      border-radius: 15px;
+      margin-bottom: 0.8rem;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      background: transparent;
+    }
+
+    .sidebar nav a.active,
+    .sidebar nav a:hover {
+      background: #333;
+      color: var(--secondary);
+      transform: translateX(5px);
+    }
+
+    .sidebar .footer {
+      margin-top: auto;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      text-align: center;
+      color: var(--primary);
+    }
+
+    .main-content {
+      margin-left: var(--sidebar-width);
+      padding: 3rem 2.5rem;
+      width: 100%;
+      max-width: 1200px;
+      background: var(--bg);
+      color: var(--primary);
+    }
+
+    .page-header {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      color: var(--primary);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .content-section {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 3rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .content-section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 214, 0, 0.12);
+    }
+
+    .content-section h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+    }
+
+    .content-section p {
+      color: var(--primary);
+      line-height: 1.8;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-section ul {
+      color: var(--primary);
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-section ol {
+      color: var(--primary);
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: #222;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 214, 0, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 214, 0, 0.4);
+    }
+
+    /* Mobile Navigation */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, #444 0%, #222 100%);
+      color: var(--primary);
+      z-index: 200;
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .mobile-nav-links a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.8rem 0.5rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      min-width: 60px;
+    }
+
+    .mobile-nav-links a i {
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .mobile-nav-links a.active,
+    .mobile-nav-links a:hover {
+      background: rgba(255, 214, 0, 0.2);
+      color: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: block;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 1.5rem;
+        padding-top: 9rem;
+      }
+
+      .page-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .content-section {
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mobile-nav-links a {
+        font-size: 0.8rem;
+        padding: 0.6rem 0.3rem;
+        min-width: 50px;
+      }
+
+      .mobile-nav-links a i {
+        font-size: 1.1rem;
+      }
+
+      .main-content {
+        padding: 1rem;
+        padding-top: 8.5rem;
+      }
+
+      .content-section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Desktop Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">Calcuttapuri</div>
+    <nav>
+      <a href="index.html"><i class="fas fa-home"></i>Home</a>
+      <a href="news.html"><i class="fas fa-newspaper"></i>News</a>
+      <a href="resource.html" class="active"><i class="fas fa-book"></i>Resource</a>
+      <a href="blog.html"><i class="fas fa-blog"></i>Blog</a>
+      <a href="llm_ensemble.html"><i class="fas fa-brain"></i>LLM Ensemble</a>
+    </nav>
+    <div class="footer">&copy; 2025 Calcuttapuri</div>
+  </aside>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav">
+    <div class="mobile-logo">Calcuttapuri</div>
+    <div class="mobile-nav-links">
+      <a href="index.html">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="news.html">
+        <i class="fas fa-newspaper"></i>
+        <span>News</span>
+      </a>
+      <a href="resource.html" class="active">
+        <i class="fas fa-book"></i>
+        <span>Resource</span>
+      </a>
+      <a href="blog.html">
+        <i class="fas fa-blog"></i>
+        <span>Blog</span>
+      </a>
+      <a href="llm_ensemble.html">
+        <i class="fas fa-brain"></i>
+        <span>LLM</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <h1>Resources</h1>
+      <p>Explore our curated collection of guides, tools, and references to help you on your AI and technology journey</p>
+    </div>
+
+    <div class="content-section">
+      <h2>📚 Documentation</h2>
+      <p>
+        Comprehensive guides and documentation to help you get started with our platform and understand AI ensemble methodologies.
+      </p>
+      <h3>Getting Started</h3>
+      <ul>
+        <li>Platform Overview and Setup Guide</li>
+        <li>First Steps with LLM Ensemble</li>
+        <li>Understanding AI Model Responses</li>
+        <li>Best Practices for Prompt Engineering</li>
+      </ul>
+      <h3>Advanced Topics</h3>
+      <ul>
+        <li>Multi-Model Comparison Techniques</li>
+        <li>Ensemble Learning Fundamentals</li>
+        <li>Custom Model Integration</li>
+        <li>Performance Optimization Strategies</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>🛠️ Tools & Utilities</h2>
+      <p>
+        Essential tools and utilities to enhance your AI development and research workflow.
+      </p>
+      <ul>
+        <li><strong>Prompt Builder:</strong> Interactive tool for crafting effective prompts</li>
+        <li><strong>Model Comparator:</strong> Side-by-side comparison of AI model outputs</li>
+        <li><strong>Response Analyzer:</strong> Deep analysis of model response patterns</li>
+        <li><strong>Ensemble Optimizer:</strong> Tools for optimizing ensemble configurations</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>📖 Learning Materials</h2>
+      <p>
+        Educational resources to deepen your understanding of AI, machine learning, and ensemble methods.
+      </p>
+      <h3>Tutorials</h3>
+      <ul>
+        <li>Introduction to Large Language Models</li>
+        <li>Ensemble Learning in Practice</li>
+        <li>Advanced Prompt Engineering Techniques</li>
+        <li>Building AI-Powered Applications</li>
+      </ul>
+      <h3>Research Papers</h3>
+      <ul>
+        <li>Latest developments in ensemble learning</li>
+        <li>Multi-model AI system architectures</li>
+        <li>Performance benchmarking studies</li>
+        <li>Future directions in AI research</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>🔗 External Resources</h2>
+      <p>
+        Curated links to valuable external resources, communities, and tools in the AI space.
+      </p>
+      <ul>
+        <li><strong>AI Research Communities:</strong> Connect with researchers and practitioners</li>
+        <li><strong>Open Source Projects:</strong> Contribute to cutting-edge AI initiatives</li>
+        <li><strong>Academic Papers:</strong> Stay updated with latest research publications</li>
+        <li><strong>Industry Reports:</strong> Market insights and trend analysis</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>💡 Quick Start Guide</h2>
+      <p>
+        New to AI ensembles? Start here for a quick introduction to our platform and methodologies.
+      </p>
+      <ol>
+        <li>Create your account and explore the dashboard</li>
+        <li>Try your first multi-model query</li>
+        <li>Compare responses from different AI models</li>
+        <li>Analyze the ensemble results</li>
+        <li>Optimize your prompts for better outcomes</li>
+      </ol>
+      <a href="llm_ensemble.html" class="cta-button">
+        <i class="fas fa-rocket"></i> Start Your Journey
+      </a>
+    </div>
+  </main>
+</body>
+</html>

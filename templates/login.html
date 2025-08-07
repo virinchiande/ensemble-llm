@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Kalidas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #ffd600;
+      --secondary: #ffe066;
+      --accent: #e67e22;
+      --bg: #222;
+      --white: #333;
+      --shadow: 0 4px 20px rgba(44,62,80,0.08);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: var(--white);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 2.5rem;
+      max-width: 400px;
+      width: 100%;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .back-home {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--secondary);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+    h2 {
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+      text-align: center;
+    }
+    .form-group {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    label {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      background: #444;
+      color: var(--primary);
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      margin-top: 1rem;
+      background: var(--accent);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 1rem;
+    }
+    button:hover {
+      background: #d35400;
+    }
+    .error {
+      color: #e74c3c;
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+    .success {
+      color: #27ae60;
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-home" href="/">
+      <i class="fas fa-arrow-left"></i> Home
+    </a>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const messageDiv = document.getElementById('message');
+      
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('password', password);
+      
+      fetch('/login', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          messageDiv.innerHTML = '<div class="success">Login successful! Redirecting...</div>';
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1500);
+        } else {
+          messageDiv.innerHTML = '<div class="error">' + data.message + '</div>';
+        }
+      })
+      .catch(error => {
+        messageDiv.innerHTML = '<div class="error">Login failed. Please try again.</div>';
+      });
+    });
+  </script>
+</body>
+</html>
