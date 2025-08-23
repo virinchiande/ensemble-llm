@@ -14,7 +14,7 @@ import pdfplumber  # install with: pip install pdfplumber
 import re
 from html import escape
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = '/uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
@@ -213,8 +213,8 @@ def upload_letter():
 
         # Create directory based on password hash
         password_hash = hashlib.md5(password.encode()).hexdigest()
-        directory_path = os.path.join("/Users/virinchiande/Desktop/LLM's", password_hash)
-        #directory_path = os.path.join(UPLOAD_FOLDER,password_hash)
+        #directory_path = os.path.join("/Users/virinchiande/Desktop/LLM's", password_hash)
+        directory_path = os.path.join(UPLOAD_FOLDER,password_hash)
         
         # Check if directory already exists
         if os.path.exists(directory_path):
