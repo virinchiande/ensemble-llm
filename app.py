@@ -300,7 +300,8 @@ def get_letter_content():
         return jsonify({"status": "error", "message": "Please enter a password"}), 400
 
     password_hash = hashlib.md5(password.encode()).hexdigest()
-    upload_dir = f"/Users/virinchiande/Desktop/LLM's/{password_hash}"
+    upload_dir = os.path.join(UPLOAD_FOLDER,password_hash)
+    #upload_dir = f"/Users/virinchiande/Desktop/LLM's/{password_hash}"
 
     if not os.path.exists(upload_dir):
         return jsonify({"status": "error", "message": "Incorrect password"}), 404
