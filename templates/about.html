@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kalidas - Portfolio</title>
+    <title>About - Kalidas</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
@@ -35,7 +35,6 @@
         color: var(--primary);
         display: flex;
         min-height: 100vh;
-        overflow: hidden;
       }
 
       .sidebar {
@@ -141,41 +140,153 @@
 
       .main-content {
         margin-left: var(--sidebar-width);
-        padding: 0;
+        padding: 3rem 2.5rem;
         width: 100%;
+        max-width: 1200px;
         background: var(--bg);
         color: var(--primary);
-        height: 100vh;
-        overflow: hidden;
       }
 
-      /* Hero Section - Full viewport, no scroll */
-      .hero-section {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+      .page-header {
+        margin-bottom: 3rem;
         text-align: center;
-        padding: 4rem 2rem;
-        background: linear-gradient(135deg, var(--bg) 0%, #333 100%);
       }
 
-      .hero-content .quote {
-        font-size: 1.8rem;
-        color: var(--primary);
-        font-style: italic;
-        margin-bottom: 2rem;
-        opacity: 0.9;
-        animation: fadeInUp 1s ease-out;
-      }
-
-      .hero-content h1 {
-        font-size: 5rem;
+      .page-header h1 {
+        font-size: 3rem;
         font-weight: 700;
         color: var(--secondary);
-        line-height: 1.2;
-        animation: fadeInUp 1s ease-out 0.3s both;
+        margin-bottom: 1rem;
+      }
+
+      .page-header p {
+        font-size: 1.3rem;
+        color: var(--primary);
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 2rem auto 0;
+        line-height: 1.6;
+        text-align: center;
+      }
+
+      .content-section {
+        background: var(--white);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        padding: 3rem;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+      }
+
+      .content-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(255, 214, 0, 0.12);
+      }
+
+      .content-section h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .content-section h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--secondary);
+        margin-bottom: 1rem;
+        margin-top: 2rem;
+      }
+
+      .content-section p {
+        color: var(--primary);
+        line-height: 1.8;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .content-section ul {
+        color: var(--primary);
+        margin-left: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .content-section li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+
+      /* Subsection Styles */
+      .subsection-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .subsection-nav {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .subsection-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        background: var(--white);
+        color: var(--primary);
+        border: 2px solid transparent;
+        padding: 1.5rem 2.5rem;
+        border-radius: 15px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: "Inter", sans-serif;
+        box-shadow: var(--shadow);
+      }
+
+      .subsection-btn i {
+        font-size: 1.3rem;
+      }
+
+      .subsection-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 214, 0, 0.2);
+        border-color: var(--secondary);
+      }
+
+      .subsection-btn.active {
+        background: linear-gradient(135deg, var(--secondary), var(--accent));
+        color: #222;
+        border-color: var(--secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 214, 0, 0.3);
+      }
+
+      .subsection-content {
+        position: relative;
+        min-height: 300px;
+      }
+
+      .subsection-panel {
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      .subsection-panel.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       /* Mobile Navigation */
@@ -242,19 +353,6 @@
         display: none !important;
       }
 
-      /* Animations */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Responsive Design */
       @media (max-width: 768px) {
         .sidebar {
           display: none;
@@ -266,20 +364,30 @@
 
         .main-content {
           margin-left: 0;
-          height: 100vh;
+          padding: 1.5rem;
+          padding-top: 9rem;
         }
 
-        .hero-section {
-          padding-top: 10rem;
-          height: 100vh;
+        .page-header h1 {
+          font-size: 2.2rem;
         }
 
-        .hero-content h1 {
-          font-size: 3rem;
+        .content-section {
+          padding: 2rem;
         }
 
-        .hero-content .quote {
-          font-size: 1.4rem;
+        .subsection-nav {
+          flex-direction: column;
+          gap: 1rem;
+          align-items: center;
+        }
+
+        .subsection-btn {
+          width: 100%;
+          max-width: 300px;
+          justify-content: center;
+          padding: 1.2rem 2rem;
+          font-size: 1.1rem;
         }
       }
 
@@ -294,12 +402,22 @@
           font-size: 1.1rem;
         }
 
-        .hero-content h1 {
-          font-size: 2.5rem;
+        .main-content {
+          padding: 1rem;
+          padding-top: 8.5rem;
         }
 
-        .hero-content .quote {
-          font-size: 1.2rem;
+        .content-section {
+          padding: 1.5rem;
+        }
+
+        .subsection-btn {
+          padding: 1rem 1.5rem;
+          font-size: 1rem;
+        }
+
+        .page-header p {
+          font-size: 1.1rem !important;
         }
       }
     </style>
@@ -314,7 +432,7 @@
         >Kalidas</a
       >
       <nav>
-        <a href="/about"><i class="fas fa-user"></i>About</a>
+        <a href="/about" class="active"><i class="fas fa-user"></i>About</a>
         <a href="/news"><i class="fas fa-newspaper"></i>News</a>
         <a href="/research"><i class="fas fa-flask"></i>Research</a>
         <a href="/contact"><i class="fas fa-envelope"></i>Contact</a>
@@ -343,7 +461,7 @@
         >Kalidas</a
       >
       <div class="mobile-nav-links">
-        <a href="/about">
+        <a href="/about" class="active">
           <i class="fas fa-user"></i>
           <span>About</span>
         </a>
@@ -379,16 +497,68 @@
     </nav>
 
     <main class="main-content">
-      <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="hero-content">
-          <p class="quote">nenu pakka julayi; aithe neekenti annay</p>
-          <h1>Kalidas</h1>
+      <div class="page-header">
+        <h1>About</h1>
+        <p>I'm an independent researcher fascinated by</p>
+      </div>
+
+      <div class="subsection-container">
+        <div class="subsection-nav">
+          <button class="subsection-btn" onclick="showSubsection('emerging')">
+            Emerging Technologies
+          </button>
+          <button
+            class="subsection-btn"
+            onclick="showSubsection('entertainment')"
+          >
+            Entertainment
+          </button>
         </div>
-      </section>
+
+        <div class="subsection-content">
+          <div id="emerging-content" class="content-section subsection-panel">
+            <p>
+              Technologies with decades of R&D on the cusp of being
+              commercialized - what cryptocurrencies looked like back in the
+              2010s.
+            </p>
+            <p>I've advised 15+ startups across various domains</p>
+            <p>
+              I'm a resource to technical founders in 4 areas - 1) product, 2)
+              distribution, 3) workflows, 4) and as a soundboard.
+            </p>
+          </div>
+
+          <div
+            id="entertainment-content"
+            class="content-section subsection-panel"
+          >
+            <p>I direct dances, sketches, ads.</p>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script>
+      // Function to show subsection content
+      function showSubsection(section) {
+        // Hide all panels
+        document.querySelectorAll(".subsection-panel").forEach((panel) => {
+          panel.classList.remove("active");
+        });
+
+        // Remove active class from all buttons
+        document.querySelectorAll(".subsection-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Show selected panel
+        document.getElementById(section + "-content").classList.add("active");
+
+        // Add active class to clicked button
+        event.target.closest(".subsection-btn").classList.add("active");
+      }
+
       // Check if user is logged in and show/hide appropriate links
       document.addEventListener("DOMContentLoaded", function () {
         fetch("/check_login_status")

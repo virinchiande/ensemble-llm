@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kalidas - Portfolio</title>
+    <title>Research - Kalidas</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
@@ -35,7 +35,6 @@
         color: var(--primary);
         display: flex;
         min-height: 100vh;
-        overflow: hidden;
       }
 
       .sidebar {
@@ -141,41 +140,72 @@
 
       .main-content {
         margin-left: var(--sidebar-width);
-        padding: 0;
+        padding: 3rem 2.5rem;
         width: 100%;
+        max-width: 1200px;
         background: var(--bg);
         color: var(--primary);
-        height: 100vh;
-        overflow: hidden;
-      }
-
-      /* Hero Section - Full viewport, no scroll */
-      .hero-section {
-        height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        min-height: 100vh;
         text-align: center;
-        padding: 4rem 2rem;
-        background: linear-gradient(135deg, var(--bg) 0%, #333 100%);
       }
 
-      .hero-content .quote {
-        font-size: 1.8rem;
-        color: var(--primary);
-        font-style: italic;
-        margin-bottom: 2rem;
-        opacity: 0.9;
+      .coming-soon-container {
+        max-width: 600px;
         animation: fadeInUp 1s ease-out;
       }
 
-      .hero-content h1 {
-        font-size: 5rem;
+      .coming-soon-icon {
+        font-size: 4rem;
+        color: var(--secondary);
+        margin-bottom: 2rem;
+        animation: rotate 4s infinite linear;
+      }
+
+      .coming-soon-title {
+        font-size: 3rem;
         font-weight: 700;
         color: var(--secondary);
-        line-height: 1.2;
-        animation: fadeInUp 1s ease-out 0.3s both;
+        margin-bottom: 1.5rem;
+      }
+
+      .coming-soon-subtitle {
+        font-size: 1.5rem;
+        color: var(--primary);
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      .coming-soon-description {
+        font-size: 1.1rem;
+        color: var(--primary);
+        line-height: 1.6;
+        opacity: 0.8;
+        margin-bottom: 3rem;
+      }
+
+      .research-preview {
+        background: var(--white);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-top: 2rem;
+        box-shadow: var(--shadow);
+        border-left: 4px solid var(--secondary);
+      }
+
+      .research-preview h3 {
+        color: var(--secondary);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .research-preview p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        opacity: 0.9;
       }
 
       /* Mobile Navigation */
@@ -242,7 +272,6 @@
         display: none !important;
       }
 
-      /* Animations */
       @keyframes fadeInUp {
         from {
           opacity: 0;
@@ -254,7 +283,15 @@
         }
       }
 
-      /* Responsive Design */
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
       @media (max-width: 768px) {
         .sidebar {
           display: none;
@@ -266,20 +303,24 @@
 
         .main-content {
           margin-left: 0;
-          height: 100vh;
+          padding: 1.5rem;
+          padding-top: 9rem;
         }
 
-        .hero-section {
-          padding-top: 10rem;
-          height: 100vh;
+        .coming-soon-title {
+          font-size: 2.2rem;
         }
 
-        .hero-content h1 {
+        .coming-soon-subtitle {
+          font-size: 1.2rem;
+        }
+
+        .coming-soon-icon {
           font-size: 3rem;
         }
 
-        .hero-content .quote {
-          font-size: 1.4rem;
+        .research-preview {
+          padding: 1.5rem;
         }
       }
 
@@ -294,12 +335,17 @@
           font-size: 1.1rem;
         }
 
-        .hero-content h1 {
-          font-size: 2.5rem;
+        .main-content {
+          padding: 1rem;
+          padding-top: 8.5rem;
         }
 
-        .hero-content .quote {
-          font-size: 1.2rem;
+        .coming-soon-title {
+          font-size: 1.8rem;
+        }
+
+        .coming-soon-description {
+          font-size: 1rem;
         }
       }
     </style>
@@ -316,7 +362,9 @@
       <nav>
         <a href="/about"><i class="fas fa-user"></i>About</a>
         <a href="/news"><i class="fas fa-newspaper"></i>News</a>
-        <a href="/research"><i class="fas fa-flask"></i>Research</a>
+        <a href="/research" class="active"
+          ><i class="fas fa-flask"></i>Research</a
+        >
         <a href="/contact"><i class="fas fa-envelope"></i>Contact</a>
         <a href="/letters" class="letters-link hidden"
           ><i class="fas fa-upload"></i>Upload Letters</a
@@ -351,7 +399,7 @@
           <i class="fas fa-newspaper"></i>
           <span>News</span>
         </a>
-        <a href="/research">
+        <a href="/research" class="active">
           <i class="fas fa-flask"></i>
           <span>Research</span>
         </a>
@@ -379,13 +427,21 @@
     </nav>
 
     <main class="main-content">
-      <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="hero-content">
-          <p class="quote">nenu pakka julayi; aithe neekenti annay</p>
-          <h1>Kalidas</h1>
+      <div class="coming-soon-container">
+        <div class="coming-soon-icon">🔬</div>
+        <h1 class="coming-soon-title">Research</h1>
+        <p class="coming-soon-subtitle">Deep dives into tomorrow's tech</p>
+        <p class="coming-soon-description">
+          I'm preparing comprehensive research on emerging technologies that are
+          reshaping industries. Expect detailed analysis, trend forecasts, and
+          insights into the technologies that will define the next decade.
+        </p>
+
+        <div class="research-preview">
+          <h3>Stay Tuned</h3>
+          <p>Exciting research content is coming soon.</p>
         </div>
-      </section>
+      </div>
     </main>
 
     <script>
