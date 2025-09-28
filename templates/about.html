@@ -58,13 +58,6 @@
         letter-spacing: 2px;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         color: var(--secondary);
-        text-decoration: none;
-        transition: all 0.3s ease;
-      }
-
-      .sidebar .logo:hover {
-        color: var(--primary);
-        transform: scale(1.05);
       }
 
       .sidebar nav {
@@ -183,7 +176,6 @@
         padding: 3rem;
         margin-bottom: 2rem;
         transition: all 0.3s ease;
-        text-align: center;
       }
 
       .content-section:hover {
@@ -433,7 +425,12 @@
   <body>
     <!-- Desktop Sidebar -->
     <aside class="sidebar">
-      <a href="/" class="logo">Kalidas</a>
+      <a
+        href="/"
+        class="logo"
+        style="text-decoration: none; color: var(--secondary)"
+        >Kalidas</a
+      >
       <nav>
         <a href="/about" class="active">About</a>
         <a href="/thoughts">Thoughts</a>
@@ -448,11 +445,17 @@
           <a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
       </div>
-      <div class="footer"></div>
+      <div class="footer">&copy; 2025 Kalidas</div>
     </aside>
 
     <!-- Mobile Navigation -->
     <nav class="mobile-nav">
+      <a
+        href="/"
+        class="mobile-logo"
+        style="text-decoration: none; color: var(--secondary)"
+        >Kalidas</a
+      >
       <div class="mobile-nav-links">
         <a href="/about" class="active">
           <span>About</span>
@@ -480,14 +483,37 @@
     <main class="main-content">
       <div class="page-header">
         <h1>About</h1>
+        <p>I'm an independent researcher fascinated by</p>
       </div>
 
-      <div class="content-section">
-        <p>I'm a resource to technical founders in 4 areas</p>
-        <p>1. Product</p>
-        <p>2. Distribution</p>
-        <p>3. Workflows</p>
-        <p>4. and as a soundboard</p>
+      <div class="subsection-container">
+        <div class="subsection-nav">
+          <button class="subsection-btn" onclick="showSubsection('emerging')">
+            Emerging Technologies
+          </button>
+          <button
+            class="subsection-btn"
+            onclick="showSubsection('entertainment')"
+          >
+            Entertainment
+          </button>
+        </div>
+
+        <div class="subsection-content">
+          <div id="emerging-content" class="content-section subsection-panel">
+            <p style="text-align: center">
+              I'm a resource to technical founders in 4 areas 1) Product, 2)
+              Distribution, 3) Workflows, 4) and as a soundboard.
+            </p>
+          </div>
+
+          <div
+            id="entertainment-content"
+            class="content-section subsection-panel"
+          >
+            <p>I direct dances, sketches, ads.</p>
+          </div>
+        </div>
       </div>
     </main>
 
