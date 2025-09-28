@@ -58,6 +58,13 @@
         letter-spacing: 2px;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         color: var(--secondary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar .logo:hover {
+        color: var(--primary);
+        transform: scale(1.05);
       }
 
       .sidebar nav {
@@ -176,6 +183,7 @@
         padding: 3rem;
         margin-bottom: 2rem;
         transition: all 0.3s ease;
+        text-align: center;
       }
 
       .content-section:hover {
@@ -425,21 +433,12 @@
   <body>
     <!-- Desktop Sidebar -->
     <aside class="sidebar">
-      <a
-        href="/"
-        class="logo"
-        style="text-decoration: none; color: var(--secondary)"
-        >Kalidas</a
-      >
+      <a href="/" class="logo">Kalidas</a>
       <nav>
-        <a href="/about" class="active"><i class="fas fa-user"></i>About</a>
-        <a href="/news"><i class="fas fa-newspaper"></i>News</a>
-        <a href="/research"><i class="fas fa-flask"></i>Research</a>
-        <a href="/contact"><i class="fas fa-envelope"></i>Contact</a>
-        <a href="/letters" class="letters-link hidden"
-          ><i class="fas fa-upload"></i>Upload Letters</a
-        >
-        <a href="/view_letters"><i class="fas fa-eye"></i>Letters</a>
+        <a href="/about" class="active">About</a>
+        <a href="/thoughts">Thoughts</a>
+        <a href="/letters" class="letters-link hidden">Upload Letters</a>
+        <a href="/view_letters">Letters</a>
       </nav>
       <div class="auth-links">
         <div class="login-link">
@@ -449,40 +448,22 @@
           <a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
       </div>
-      <div class="footer">&copy; 2025 Kalidas</div>
+      <div class="footer"></div>
     </aside>
 
     <!-- Mobile Navigation -->
     <nav class="mobile-nav">
-      <a
-        href="/"
-        class="mobile-logo"
-        style="text-decoration: none; color: var(--secondary)"
-        >Kalidas</a
-      >
       <div class="mobile-nav-links">
         <a href="/about" class="active">
-          <i class="fas fa-user"></i>
           <span>About</span>
         </a>
-        <a href="/news">
-          <i class="fas fa-newspaper"></i>
-          <span>News</span>
-        </a>
-        <a href="/research">
-          <i class="fas fa-flask"></i>
-          <span>Research</span>
-        </a>
-        <a href="/contact">
-          <i class="fas fa-envelope"></i>
-          <span>Contact</span>
+        <a href="/thoughts">
+          <span>Thoughts</span>
         </a>
         <a href="/letters" class="letters-link hidden">
-          <i class="fas fa-upload"></i>
           <span>Upload Letters</span>
         </a>
         <a href="/view_letters">
-          <i class="fas fa-eye"></i>
           <span>Letters</span>
         </a>
         <a href="/login" class="login-link">
@@ -499,43 +480,14 @@
     <main class="main-content">
       <div class="page-header">
         <h1>About</h1>
-        <p>I'm an independent researcher fascinated by</p>
       </div>
 
-      <div class="subsection-container">
-        <div class="subsection-nav">
-          <button class="subsection-btn" onclick="showSubsection('emerging')">
-            Emerging Technologies
-          </button>
-          <button
-            class="subsection-btn"
-            onclick="showSubsection('entertainment')"
-          >
-            Entertainment
-          </button>
-        </div>
-
-        <div class="subsection-content">
-          <div id="emerging-content" class="content-section subsection-panel">
-            <p>
-              Technologies with decades of R&D on the cusp of being
-              commercialized - what cryptocurrencies looked like back in the
-              2010s.
-            </p>
-            <p>I've advised 15+ startups across various domains</p>
-            <p>
-              I'm a resource to technical founders in 4 areas - 1) product, 2)
-              distribution, 3) workflows, 4) and as a soundboard.
-            </p>
-          </div>
-
-          <div
-            id="entertainment-content"
-            class="content-section subsection-panel"
-          >
-            <p>I direct dances, sketches, ads.</p>
-          </div>
-        </div>
+      <div class="content-section">
+        <p>I'm a resource to technical founders in 4 areas</p>
+        <p>1. Product</p>
+        <p>2. Distribution</p>
+        <p>3. Workflows</p>
+        <p>4. and as a soundboard</p>
       </div>
     </main>
 

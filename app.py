@@ -183,19 +183,9 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/news")
-def news():
-    return render_template("news.html")
-
-
-@app.route("/research")
-def research():
-    return render_template("research.html")
-
-
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
+@app.route("/thoughts")
+def thoughts():
+    return render_template("thoughts.html")
 
 
 @app.route("/llm_ensemble", methods=["GET", "POST"])
